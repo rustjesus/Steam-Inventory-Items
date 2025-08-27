@@ -18,7 +18,8 @@ public class SteamInventoryChecker : MonoBehaviour
         81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,
         100, 200, 300, 400, 500, 600, 700, 800, 900, 1000,
         1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900, 2000, 2100, 2200, 2300, 2400,
-        2500, 2600, 2700, 2800, 2900, 3000};
+        2500, 2600, 2700, 2800, 2900, 3000, 3100, 3200, 3300, 3400, 3500, 3600, 3700, 3800,
+        3900, 4000};
     //100 blue hat, 200 red hat, 1001 gold coin
     private HashSet<int> foundItemDefs = new HashSet<int>();
     public static bool oncePerSession = false;
@@ -42,6 +43,7 @@ public class SteamInventoryChecker : MonoBehaviour
 
             oncePerSession = true;
         }
+
         inventoryCallback = Callback<SteamInventoryResultReady_t>.Create(OnSteamInventoryResultReady);
 
         if (!SteamInventory.GetAllItems(out inventoryResult))
@@ -121,7 +123,7 @@ public class SteamInventoryChecker : MonoBehaviour
             {
                 if ((int)item.m_iDefinition == targetItemDefIds[i])//blue hat
                 {
-                    ObscuredPrefs.SetInt("Item" + targetItemDefIds[i], 1);
+                    ObscuredPrefs.SetInt("Item" + targetItemDefIds[i], quantity);
                     Debug.Log("Item ID: " + targetItemDefIds[i] + " unlocked");
                 }
             }
